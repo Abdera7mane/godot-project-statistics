@@ -1,0 +1,120 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://addons/project-statistics/nodes/StatisticsPreview.gd" type="Script" id=1]
+[ext_resource path="res://addons/project-statistics/nodes/Overview.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/project-statistics/nodes/ScenesView.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/project-statistics/nodes/ResourcesView.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/project-statistics/nodes/ScriptsView.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/project-statistics/nodes/MiscView.tscn" type="PackedScene" id=6]
+
+[node name="StatisticsPreview" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 300 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSplitContainer" type="VSplitContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+dragger_visibility = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="VSplitContainer"]
+margin_right = 1024.0
+margin_bottom = 24.0
+custom_constants/margin_bottom = 4
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/MarginContainer"]
+margin_right = 1024.0
+margin_bottom = 20.0
+dragger_visibility = 2
+
+[node name="Label" type="Label" parent="VSplitContainer/MarginContainer/HSplitContainer"]
+margin_top = 3.0
+margin_right = 111.0
+margin_bottom = 17.0
+text = "Project statistics:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/MarginContainer/HSplitContainer"]
+margin_left = 111.0
+margin_right = 1024.0
+margin_bottom = 20.0
+size_flags_vertical = 0
+alignment = 2
+
+[node name="RefreshButton" type="Button" parent="VSplitContainer/MarginContainer/HSplitContainer/HBoxContainer"]
+margin_left = 853.0
+margin_right = 913.0
+margin_bottom = 20.0
+text = "Refresh"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VSplitContainer"]
+margin_top = 24.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VSplitContainer/ScrollContainer"]
+margin_right = 1012.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 0, 600 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="VSplitContainer/ScrollContainer/MarginContainer"]
+margin_right = 1012.0
+margin_bottom = 600.0
+
+[node name="TabContainer" type="TabContainer" parent="VSplitContainer/ScrollContainer/MarginContainer"]
+margin_right = 1012.0
+margin_bottom = 600.0
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Overview" parent="VSplitContainer/ScrollContainer/MarginContainer/TabContainer" instance=ExtResource( 2 )]
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Scenes" parent="VSplitContainer/ScrollContainer/MarginContainer/TabContainer" instance=ExtResource( 3 )]
+visible = false
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Resources" parent="VSplitContainer/ScrollContainer/MarginContainer/TabContainer" instance=ExtResource( 4 )]
+visible = false
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Scripts" parent="VSplitContainer/ScrollContainer/MarginContainer/TabContainer" instance=ExtResource( 5 )]
+visible = false
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Misc" parent="VSplitContainer/ScrollContainer/MarginContainer/TabContainer" instance=ExtResource( 6 )]
+visible = false
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[connection signal="pressed" from="VSplitContainer/MarginContainer/HSplitContainer/HBoxContainer/RefreshButton" to="." method="_on_refresh_pressed"]
+[connection signal="file_selected" from="VSplitContainer/ScrollContainer/MarginContainer/TabContainer/Overview" to="." method="_on_file_selected"]
+[connection signal="file_selected" from="VSplitContainer/ScrollContainer/MarginContainer/TabContainer/Scenes" to="." method="_on_file_selected"]
+[connection signal="file_selected" from="VSplitContainer/ScrollContainer/MarginContainer/TabContainer/Resources" to="." method="_on_file_selected"]
+[connection signal="file_selected" from="VSplitContainer/ScrollContainer/MarginContainer/TabContainer/Scripts" to="." method="_on_file_selected"]
+[connection signal="file_selected" from="VSplitContainer/ScrollContainer/MarginContainer/TabContainer/Misc" to="." method="_on_file_selected"]

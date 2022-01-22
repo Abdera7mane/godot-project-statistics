@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/project-statistics/nodes/charts/PieGraph.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/project-statistics/nodes/ScriptsView.gd" type="Script" id=2]
+
+[node name="ScriptsView" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSplitContainer" type="VSplitContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer"]
+margin_right = 1024.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 0, 175 )
+
+[node name="SummaryTree" type="Tree" parent="VSplitContainer/HSplitContainer"]
+margin_right = 506.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 0, 180 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+hide_root = true
+
+[node name="MarginContainer" type="MarginContainer" parent="VSplitContainer/HSplitContainer"]
+margin_left = 518.0
+margin_right = 1024.0
+margin_bottom = 180.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PieGraph" parent="VSplitContainer/HSplitContainer/MarginContainer" instance=ExtResource( 1 )]
+margin_right = 506.0
+margin_bottom = 180.0
+
+[node name="Tree" type="Tree" parent="VSplitContainer"]
+margin_top = 192.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 7
+hide_root = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
