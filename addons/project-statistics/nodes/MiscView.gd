@@ -107,9 +107,16 @@ func update_icons() -> void:
 	var next: TreeItem = root.get_children()
 	while next:
 		var icon_path: String = next.get_metadata(EXTENSION_COLUMN)
-		if ResourceLoader.exists(icon_path):
-			next.set_icon(NAME_COLUMN, ResourceLoader.load(icon_path))
-			next.set_icon_max_width(NAME_COLUMN, 16)
+		
+		var icon: Texture 
+		
+		if has_icon(icon_path, "EditorIcons"):
+			icon = get_icon(icon_path, "EditorIcons")
+		elif ResourceLoader.exists(icon_path):
+			icon = ResourceLoader.load(icon_path)
+		
+		next.set_icon(NAME_COLUMN, icon)
+		next.set_icon_max_width(NAME_COLUMN, 16)
 		
 		next.set_icon(TOTAL_LINES_COLUMN, get_icon("MultiLine", "EditorIcons"))
 		next.set_icon(SOURCE_LINES_COLUMN, get_icon("MultiLine", "EditorIcons"))

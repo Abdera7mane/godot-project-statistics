@@ -1,4 +1,5 @@
 const FileStatistics: Script = preload("./FileStatistics.gd")
+const ConfigFileStatistics: Script = preload("./extensions/ConfigFileStatistics.gd")
 const CSharpStatistics: Script = preload("./extensions/CSharpStatistics.gd")
 const GDScriptStatistics: Script = preload("./extensions/GDScriptStatistics.gd")
 const JSONStatistics: Script = preload("./extensions/JSONStatistics.gd")
@@ -113,6 +114,8 @@ func get_file_loader(file_path: String) -> FileStatistics:
 	match file_path.get_extension().to_lower():
 		"cs":
 			return CSharpStatistics.new()
+		"ini", "cfg":
+			return ConfigFileStatistics.new()
 		"gd":
 			return GDScriptStatistics.new()
 		"md":
